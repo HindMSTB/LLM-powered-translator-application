@@ -1,0 +1,8 @@
+D:\projectIA\translator-service\src\main\java\com\example\translator\client\GeminiClient.java
+D:\projectIA\translator-service\src\main\java\com\example\translator\config\EnvConfig.java
+D:\projectIA\translator-service\src\main\java\com\example\translator\controllers\TranslatorController.java
+D:\projectIA\translator-service\src\main\java\com\example\translator\CorsFilter.java
+D:\projectIA\translator-service\src\main\java\com\example\translator\MyApplication.java
+D:\projectIA\translator-service\src\main\java\com\example\translator\security\AuthFilter.java
+D:\projectIA\translator-service\src\main\java\com\example\translator\services\TranslatorService.java
+D:\projectIA\translator-service\src\main\java\com\example\translator\TranslationRequest.java

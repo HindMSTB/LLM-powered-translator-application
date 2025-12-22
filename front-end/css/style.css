@@ -1,0 +1,105 @@
+/* ===== Body ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9; /* blanc cassé */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ===== Container ===== */
+.container {
+    width: 90%;
+    max-width: 900px;
+    background-color: #fff; /* blanc pur */
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+/* ===== Titre ===== */
+h1 {
+    color: #8B4513; /* marron foncé */
+    margin-bottom: 30px;
+}
+
+/* ===== Zones de traduction horizontales ===== */
+.translator {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.box label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #5C4033; /* marron moyen */
+}
+
+/* ===== Textarea ===== */
+textarea {
+    width: 100%;
+    height: 180px;
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid #D2B48C; /* beige/marron clair */
+    border-radius: 10px;
+    background: linear-gradient(180deg, #FFF8F0, #FFFFFF); /* beige → blanc */
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: none;
+}
+
+textarea:focus {
+    border-color: #A0522D; /* marron foncé */
+    box-shadow: 0 0 5px rgba(160,82,45,0.4);
+}
+
+/* ===== Bouton ===== */
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 12px 35px;
+    font-size: 16px;
+    background-color: #8B4513; /* marron foncé */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #A0522D; /* marron plus clair */
+    transform: scale(1.05);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 750px) {
+    .translator {
+        flex-direction: column;
+    }
+    textarea {
+        height: 150px;
+    }
+}
