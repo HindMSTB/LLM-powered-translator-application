@@ -2,26 +2,257 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>English → Darija Translator</title>
-  <link rel="stylesheet" href="css/style.css" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 15px; }
-    textarea { width: 100%; height: 100px; margin-bottom: 10px; }
-    button { padding: 10px 15px; margin-right: 10px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      padding: 0;
+      width: 100%;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .container {
+      background: #fff;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background-color: #8B4513;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(139, 69, 19, 0.3);
+      flex-shrink: 0;
+    }
+
+    .header h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .header .flag {
+      font-size: 24px;
+    }
+
+    .content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      overflow-y: auto;
+    }
+
+    .input-section, .output-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #5C4033;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 12px;
+      border: 2px solid #D2B48C;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      resize: vertical;
+      background: linear-gradient(180deg, #FFF8F0, #FFFFFF);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #A0522D;
+      box-shadow: 0 0 5px rgba(160, 82, 45, 0.4);
+    }
+
+    textarea#darijaText {
+      background: linear-gradient(180deg, #FFF8F0, #FFFFFF);
+      color: #333;
+      font-weight: 500;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: white;
+    }
+
+    #startSpeechBtn {
+      background-color: #A0522D;
+    }
+
+    #startSpeechBtn:hover:not(:disabled) {
+      background-color: #8B4513;
+      transform: scale(1.05);
+    }
+
+    #startSpeechBtn.listening {
+      animation: pulse 1.5s infinite;
+      background-color: #D2691E;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    #translateBtn {
+      background-color: #8B4513;
+    }
+
+    #translateBtn:hover:not(:disabled) {
+      background-color: #A0522D;
+      transform: scale(1.05);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .loading {
+      text-align: center;
+      color: #8B4513;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .loading.active {
+      display: block;
+    }
+
+    .status {
+      font-size: 11px;
+      color: #5C4033;
+      text-align: center;
+      margin-top: 5px;
+      font-style: italic;
+      min-height: 16px;
+    }
+
+    .footer {
+      padding: 12px 20px;
+      background: #FFF8F0;
+      border-top: 1px solid #D2B48C;
+      text-align: center;
+      font-size: 11px;
+      color: #5C4033;
+      flex-shrink: 0;
+    }
+
+    .tip {
+      background: #FFF8F0;
+      border-left: 3px solid #8B4513;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: #5C4033;
+    }
   </style>
 </head>
 <body>
-  <h2>English → Darija Translator</h2>
+  <div class="container">
+    <div class="header">
+      <h2>
+        <span class="flag">🇬🇧</span>
+        English → Darija
+        <span class="flag">🇲🇦</span>
+      </h2>
+    </div>
 
-  <textarea id="englishText" placeholder="Type or speak English here..."></textarea>
+    <div class="content">
+      <div class="input-section">
+        <label for="englishText">
+          <span>🗣️</span> English Text
+        </label>
+        <textarea 
+          id="englishText" 
+          placeholder="Type, speak, or select text on any page..."
+        ></textarea>
+        <div class="button-group">
+          <button id="startSpeechBtn">
+            <span>🎤</span>
+            <span class="btn-text">Start Speaking</span>
+          </button>
+          <button id="translateBtn">
+            <span>🔄</span>
+            <span>Translate</span>
+          </button>
+        </div>
+        <div class="loading" id="loadingIndicator">⏳ Translating...</div>
+        <div class="status" id="statusText"></div>
+      </div>
 
-  <div>
-    <button id="startSpeechBtn">🎤 Start Speaking</button>
-    <button id="translateBtn">Translate</button>
+      <div class="output-section">
+        <label for="darijaText">
+          <span>📝</span> Darija Translation
+        </label>
+        <textarea 
+          id="darijaText" 
+          readonly 
+          placeholder="Translation will appear here..."
+        ></textarea>
+      </div>
+
+      <div class="tip">
+        💡 <strong>Tip:</strong> Select text on any webpage to automatically translate it!
+      </div>
+    </div>
+
+    <div class="footer">
+      Powered by AI Translation
+    </div>
   </div>
 
-  <textarea id="darijaText" readonly placeholder="Translation will appear here..."></textarea>
-
-  <script src="js/main.js"></script>
+  <script src="js/panel.js"></script>
 </body>
 </html>

@@ -16,7 +16,7 @@ public class CorsFilter implements ContainerResponseFilter {
 
         responseContext.getHeaders().putSingle(
                 "Access-Control-Allow-Origin",
-                "http://127.0.0.1:5500"
+                "http://127.0.0.1:5501"
         );
 
         responseContext.getHeaders().putSingle(
